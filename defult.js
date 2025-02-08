@@ -177,10 +177,10 @@ document.addEventListener("DOMContentLoaded", function() {
     function initImageModal() {
         const images = document.querySelectorAll('img');
         images.forEach(img => {
-        img.addEventListener('click', function() {
-            openModal(this);
-        });
-        img.draggable = false; // 禁用图片的拖动
+            img.addEventListener('click', function() {
+                openModal(this);
+            });
+            img.draggable = false; // 禁用图片的拖动
         });
     
         let modalOverlay, modalImage, closeButton;
@@ -207,29 +207,16 @@ document.addEventListener("DOMContentLoaded", function() {
         function createModalElements() {
             // 创建模态框遮罩层
             modalOverlay = document.createElement('div');
-            modalOverlay.style.position = 'fixed';
-            modalOverlay.style.top = '0';
-            modalOverlay.style.left = '0';
-            modalOverlay.style.width = '100%';
-            modalOverlay.style.height = '100%';
-            modalOverlay.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
-            modalOverlay.style.display = 'flex';
-            modalOverlay.style.justifyContent = 'center';
-            modalOverlay.style.alignItems = 'center';
-            modalOverlay.style.zIndex = '1000';
-            modalOverlay.style.overflow = 'hidden'; // 防止页面滚动
+            modalOverlay.classList.add('image-modal-overlay');
                                     
             // 创建图片容器
             const imageContainer = document.createElement('div');
-            imageContainer.style.position = 'relative';
+            imageContainer.classList.add('image-container');
             
             // 创建图片元素
             modalImage = document.createElement('img');
-            modalImage.style.maxWidth = '100vw';
-            modalImage.style.maxHeight = '100vh';
-            modalImage.style.objectFit = 'contain';
-            modalImage.style.cursor = 'zoom-in';
-            modalImage.style.userSelect = 'none'; // 禁止选中文本
+            modalImage.classList.add('image-modal-img');
+
             modalImage.draggable = false; // 禁用拖拽
             
             // 将图片添加到容器
@@ -238,18 +225,11 @@ document.addEventListener("DOMContentLoaded", function() {
             // 将图片容器添加到模态框遮罩层
             modalOverlay.appendChild(imageContainer);
             
-            // **修改：将关闭按钮固定在浏览器窗口的右上角**
+
             // 创建关闭按钮
-            closeButton = document.createElement('img');
-            closeButton.src = './img/close.svg';
-            closeButton.style.position = 'fixed'; // 相对于浏览器窗口定位
-            closeButton.style.top = '20px';
-            closeButton.style.right = '20px';
-            closeButton.style.width = '50px';
-            closeButton.style.height = '50px';
-            closeButton.style.cursor = 'pointer';
-            closeButton.style.zIndex = '1001'; // 确保在模态框之上
-            
+            closeButton = document.createElement('div');
+            closeButton.classList.add('image-modal-close');
+
             // 将关闭按钮添加到模态框遮罩层
             modalOverlay.appendChild(closeButton);
             
